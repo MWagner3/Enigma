@@ -6,8 +6,37 @@ class Enigma
     @character_set = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = generate_key, date = today_date)
+
+  def generate_key
+    rand(99999).to_s.rjust(5, "0")
+  end
+
+  def today_date
 
   end
+
+  def encrypt(message, key = generate_key, date = today_date)
+
+    # result = {}
+    #
+    # keys =
+    #   A
+    #   B
+    #   C
+    #   D
+    #
+    # offsets =
+    #   A
+    #   B
+    #   C
+    #   D
+    #
+    #
+    # keys + offsets = shift values
+
+  end
+
+
+
 
 end
