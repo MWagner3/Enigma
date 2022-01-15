@@ -1,12 +1,14 @@
 class Enigma
 
-  attr_reader :character_set
+  attr_reader :character_set, :message_characters, :encrypted_message
 
   def initialize
     @character_set = ("a".."z").to_a << " "
     @key_hash = {}
     @offset_hash = {}
     @shift_hash = {}
+    @message_characters = []
+    @encrypted_message = nil
   end
 
 
@@ -42,24 +44,19 @@ class Enigma
     @shift_hash
   end
 
+  def message_to_array(message) #'hello' => ['h', 'e', 'l', 'l', 'o']
+    @message_characters = message.split(//)
+  end
+
+  # def
   def encrypt(message, key = generate_key, date = today_date)
 
-    # result = {}
-    #
-    # keys =
-    #   A
-    #   B
-    #   C
-    #   D
-    #
-    # offsets =
-    #   A
-    #   B
-    #   C
-    #   D
-    #
-    #
-    # keys + offsets = shift values
+  #   result = {
+  #   encryption: x,
+  #   key:        key,
+  #   date:       date
+  # }
+
 
   end
 

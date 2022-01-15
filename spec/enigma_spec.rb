@@ -49,8 +49,13 @@ RSpec.describe Enigma do
   it '#create_shift_values_hash' do
     enigma.create_key_hash('54321')
     enigma.create_offset_hash("011522")
-    binding.pry
     expect(enigma.create_shift_values_hash)
+  end
+
+  it '#message_to_array breakes message onto array of characters' do
+    expect(enigma.message_characters).to eq([])
+    enigma.message_to_array('hello')
+    expect(enigma.message_characters).to eq(['h', 'e', 'l', 'l', 'o'])
   end
 
   xit '#encrypt returns a hash with three keys' do
