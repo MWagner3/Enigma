@@ -42,9 +42,15 @@ RSpec.describe Enigma do
   it '#create_offset_hash' do
 
     expect(enigma.create_offset_hash("011522")).to be_a(Hash)
-    binding.pry
     expect(enigma.create_offset_hash("011522").count).to eq(4)
 
+  end
+
+  it '#create_shift_values_hash' do
+    enigma.create_key_hash('54321')
+    enigma.create_offset_hash("011522")
+    binding.pry
+    expect(enigma.create_shift_values_hash)
   end
 
   xit '#encrypt returns a hash with three keys' do
