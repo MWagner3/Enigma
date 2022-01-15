@@ -18,4 +18,16 @@ RSpec.describe Enigma do
     expect(enigma.character_set).to be_a(Array)
     expect(enigma.character_set.count).to eq(27)
   end
+
+  xit '#encrypt returns a hash with three keys' do
+
+    expect(enigma.encrypt("hello world", "02715", "040895")).to be_a(Hash)
+  end
+
+  it '#generate_key' do
+
+    expect(enigma.generate_key).to be_a(String)
+    expect(enigma.generate_key.length).to eq(5)
+  end
+
 end
