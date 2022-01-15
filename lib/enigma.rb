@@ -12,7 +12,7 @@ class Enigma
   end
 
   def today_date
-
+    Date.today.strftime("%m%d%y")
   end
 
   def encrypt(message, key = generate_key, date = today_date)
