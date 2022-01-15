@@ -15,13 +15,16 @@ class Enigma
     Date.today.strftime("%m%d%y")
   end
 
-  def create_key_array(key) #12245
-    key_array = []
-    key_array
-    key_array
-    key_array
-    key_array
+  def create_key_hash(key_string) # "54321"
+    key_hash = {}
+    key_hash[:A] = key_string[0..1].to_i
+    key_hash[:B] = key_string[1..2].to_i
+    key_hash[:C] = key_string[2..3].to_i
+    key_hash[:D] = key_string[3..4].to_i
+    key_hash
   end
+
+  
 
   def encrypt(message, key = generate_key, date = today_date)
 

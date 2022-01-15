@@ -26,17 +26,25 @@ RSpec.describe Enigma do
     expect(enigma.generate_key.length).to eq(5)
   end
 
-  it 'today_date' do
+  it '#today_date' do
 
     expect(enigma.today_date).to be_a(String)
     expect(enigma.today_date.length).to eq(6)
   end
 
-  it '#create_key_array' do
-binding.pry
-    expect(enigma.create_key_array(1111)).to be_a(Array)
+  it '#create_key_hash' do
+
+    expect(enigma.create_key_hash('54321')).to be_a(Hash)
+    expect(enigma.create_key_hash('54321').keys.length).to be(4)
 
   end
+
+  # it '#create_offset_hash' do
+  #
+  #   expect(enigma.create_key_hash('54321')).to be_a(Hash)
+  #   expect(enigma.create_key_hash('54321').keys.length).to be(4)
+  #
+  # end
 
   xit '#encrypt returns a hash with three keys' do
 
