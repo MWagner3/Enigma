@@ -15,6 +15,14 @@ class Enigma
     Date.today.strftime("%m%d%y")
   end
 
+  def create_key_array(key) #12245
+    key_array = []
+    key_array
+    key_array
+    key_array
+    key_array
+  end
+
   def encrypt(message, key = generate_key, date = today_date)
 
     # result = {}
@@ -35,6 +43,7 @@ class Enigma
     # keys + offsets = shift values
 
   end
+
 
 
 

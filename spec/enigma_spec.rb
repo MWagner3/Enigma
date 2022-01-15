@@ -32,6 +32,12 @@ RSpec.describe Enigma do
     expect(enigma.today_date.length).to eq(6)
   end
 
+  it '#create_key_array' do
+binding.pry
+    expect(enigma.create_key_array(1111)).to be_a(Array)
+
+  end
+
   xit '#encrypt returns a hash with three keys' do
 
     expect(enigma.encrypt("hello world", "02715", "040895")).to be_a(Hash)
