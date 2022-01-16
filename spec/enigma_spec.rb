@@ -56,6 +56,8 @@ RSpec.describe Enigma do
     expect(enigma.message_characters).to eq([])
     enigma.message_to_array('hello')
     expect(enigma.message_characters).to eq(['h', 'e', 'l', 'l', 'o'])
+    enigma.message_to_array('HeLlO')
+    expect(enigma.message_characters).to eq(['h', 'e', 'l', 'l', 'o'])
   end
 
   xit '#encrypt returns a hash with three keys' do

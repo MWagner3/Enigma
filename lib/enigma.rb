@@ -8,7 +8,6 @@ class Enigma
     @offset_hash = {}
     @shift_hash = {}
     @message_characters = []
-    @encrypted_message = nil
   end
 
 
@@ -45,10 +44,28 @@ class Enigma
   end
 
   def message_to_array(message) #'hello' => ['h', 'e', 'l', 'l', 'o']
-    @message_characters = message.split(//)
+    @message_characters = message.downcase.split(//)
   end
 
-  # def
+  def convert_character(character)
+    @number += 1
+     if @number == 1
+       letter_index = @character_set.index(character)
+       converted_character = @character_set.rotate(letter_index + @shift_hash[:A])[0]
+     elsif @number == 2
+       letter_index = @character_set.index(character)
+       converted_character = @character_set.rotate(letter_index + @shift_hash[:B])[0]
+     elsif @number == 3
+       letter_index = @character_set.index(character)
+       converted_character = @character_set.rotate(letter_index + @shift_hash[:C])[0]
+     elsif @number == 4
+       @number = 0
+       letter_index = @character_set.index(character)
+       converted_character = @character_set.rotate(letter_index + @shift_hash[:D])[0]
+     end
+     letter_encrypted
+   end
+
   def encrypt(message, key = generate_key, date = today_date)
 
   #   result = {
