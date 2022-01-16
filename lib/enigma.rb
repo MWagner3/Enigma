@@ -50,18 +50,18 @@ class Enigma
   def convert_character(character)
     @number += 1
      if @number == 1
-       letter_index = @character_set.index(character)
-       converted_character = @character_set.rotate(letter_index + @shift_hash[:A])[0]
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate(character_index + @shift_hash[:A])[0]
      elsif @number == 2
-       letter_index = @character_set.index(character)
-       converted_character = @character_set.rotate(letter_index + @shift_hash[:B])[0]
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate(character_index + @shift_hash[:B])[0]
      elsif @number == 3
-       letter_index = @character_set.index(character)
-       converted_character = @character_set.rotate(letter_index + @shift_hash[:C])[0]
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate(character_index + @shift_hash[:C])[0]
      elsif @number == 4
        @number = 0
-       letter_index = @character_set.index(character)
-       converted_character = @character_set.rotate(letter_index + @shift_hash[:D])[0]
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate(character_index + @shift_hash[:D])[0]
      end
      letter_encrypted
    end
