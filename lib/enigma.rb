@@ -63,7 +63,7 @@ class Enigma
        character_index = @character_set.index(character)
        converted_character = @character_set.rotate(character_index + @shift_hash[:D])[0]
      end
-     letter_encrypted
+     converted_character
    end
 
   def encrypt(message, key = generate_key, date = today_date)
