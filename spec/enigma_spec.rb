@@ -69,6 +69,7 @@ RSpec.describe Enigma do
     expect(enigma.convert_character('l')).to eq('y')
     expect(enigma.convert_character('l')).to eq('j')
     expect(enigma.convert_character('o')).to eq('u')
+    expect(enigma.convert_character('!')).to eq('!')
   end
 
   it '#convert_message' do
@@ -79,8 +80,15 @@ RSpec.describe Enigma do
     expect(enigma.convert_message('hello')).to eq("nyyju")
   end
 
-  xit '#encrypt returns a hash with three keys' do
+  it '#convert_message should ignore special characters' do
 
-    expect(enigma.encrypt("hello world", "02715", "040895")).to be_a(Hash)
+    expect(enigma.convert_message('H!e*l&lo')).to eq("n!y*y&ju")
+  end
+
+  it '#encrypt returns a hash with three keys, can generate key and date if none are provided' do
+
+    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
+    expect(enigma.encrypt("hello world", "54321")).to be_a(Hash)
+    expect(enigma.encrypt("hello world")).to be_a(Hash)
   end
 end
