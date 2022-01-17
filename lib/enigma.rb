@@ -8,6 +8,7 @@ class Enigma
     @offset_hash = {}
     @shift_hash = {}
     @message_characters = []
+    @number = 0
   end
 
 
