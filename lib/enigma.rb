@@ -67,6 +67,14 @@ class Enigma
      converted_character
    end
 
+   def convert_message(message)
+     message_to_array(message)
+    @result = @message_characters.map do |character|
+       convert_character(character)
+     end
+     @result.join
+   end
+
   def encrypt(message, key = generate_key, date = today_date)
 
   #   result = {

@@ -71,6 +71,14 @@ RSpec.describe Enigma do
     expect(enigma.convert_character('o')).to eq('u')
   end
 
+  it '#convert_message' do
+
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.convert_message('hello')).to eq("nyyju")
+  end
+
   xit '#encrypt returns a hash with three keys' do
 
     expect(enigma.encrypt("hello world", "02715", "040895")).to be_a(Hash)
