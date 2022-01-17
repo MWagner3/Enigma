@@ -48,23 +48,27 @@ class Enigma
   end
 
   def convert_character(character)
-    @number += 1
-     if @number == 1
+    if @character_set.include?(character) == false
+      converted_character = character
+    else
+      @number += 1
+      if @number == 1
        character_index = @character_set.index(character)
        converted_character = @character_set.rotate(character_index + @shift_hash[:A])[0]
-     elsif @number == 2
+      elsif @number == 2
        character_index = @character_set.index(character)
        converted_character = @character_set.rotate(character_index + @shift_hash[:B])[0]
-     elsif @number == 3
+      elsif @number == 3
        character_index = @character_set.index(character)
        converted_character = @character_set.rotate(character_index + @shift_hash[:C])[0]
-     elsif @number == 4
+      elsif @number == 4
        @number = 0
        character_index = @character_set.index(character)
        converted_character = @character_set.rotate(character_index + @shift_hash[:D])[0]
-     end
-     converted_character
-   end
+      end
+    end
+    converted_character
+  end
 
    def convert_message(message)
      message_to_array(message)
