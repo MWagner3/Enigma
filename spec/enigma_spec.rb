@@ -26,10 +26,57 @@ RSpec.describe Enigma do
     expect(enigma.generate_key.length).to eq(5)
   end
 
-  it 'today_date' do
+  it '#today_date' do
 
     expect(enigma.today_date).to be_a(String)
     expect(enigma.today_date.length).to eq(6)
+  end
+
+  it '#create_key_hash' do
+
+    expect(enigma.create_key_hash('54321')).to be_a(Hash)
+    expect(enigma.create_key_hash('54321').keys.length).to be(4)
+
+  end
+
+  it '#create_offset_hash' do
+
+    expect(enigma.create_offset_hash("011522")).to be_a(Hash)
+    expect(enigma.create_offset_hash("011522").count).to eq(4)
+
+  end
+
+  it '#create_shift_values_hash' do
+    enigma.create_key_hash('54321')
+    enigma.create_offset_hash("011522")
+    expect(enigma.create_shift_values_hash)
+  end
+
+  it '#message_to_array breakes message onto array of characters' do
+    expect(enigma.message_characters).to eq([])
+    enigma.message_to_array('hello')
+    expect(enigma.message_characters).to eq(['h', 'e', 'l', 'l', 'o'])
+    enigma.message_to_array('HeLlO')
+    expect(enigma.message_characters).to eq(['h', 'e', 'l', 'l', 'o'])
+  end
+
+  it '#convert_character' do
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.convert_character('h')).to eq('n')
+    expect(enigma.convert_character('e')).to eq('y')
+    expect(enigma.convert_character('l')).to eq('y')
+    expect(enigma.convert_character('l')).to eq('j')
+    expect(enigma.convert_character('o')).to eq('u')
+  end
+
+  it '#convert_message' do
+
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.convert_message('hello')).to eq("nyyju")
   end
 
   xit '#encrypt returns a hash with three keys' do
