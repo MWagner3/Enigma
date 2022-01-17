@@ -72,6 +72,18 @@ RSpec.describe Enigma do
     expect(enigma.convert_character('!')).to eq('!')
   end
 
+  it '#revert_character' do
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.revert_character('n')).to eq('h')
+    expect(enigma.revert_character('y')).to eq('e')
+    expect(enigma.revert_character('y')).to eq('l')
+    expect(enigma.revert_character('j')).to eq('l')
+    expect(enigma.revert_character('u')).to eq('o')
+    expect(enigma.revert_character('!')).to eq('!')
+  end
+
   it '#convert_message' do
 
     enigma.create_key_hash("54321")
@@ -80,15 +92,31 @@ RSpec.describe Enigma do
     expect(enigma.convert_message('hello')).to eq("nyyju")
   end
 
-  it '#convert_message should ignore special characters' do
+  it '#revert_message' do
 
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.revert_message('nyyju')).to eq("hello")
+  end
+
+  it '#convert_message should ignore special characters' do
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
     expect(enigma.convert_message('H!e*l&lo')).to eq("n!y*y&ju")
   end
 
   it '#encrypt returns a hash with three keys, can generate key and date if none are provided' do
-
-    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
     expect(enigma.encrypt("hello world", "54321")).to be_a(Hash)
     expect(enigma.encrypt("hello world")).to be_a(Hash)
+    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
   end
+
+  it '#decrypt returns a hash with three keys, can generate a date if none are provided' do
+
+    expect(enigma.decrypt("nyyjutimxeq", "54321", "011522")).to be_a(Hash)
+    expect(enigma.decrypt("nyyjutimxeq", "54321")).to be_a(Hash)
+  end
+
 end

@@ -1,6 +1,6 @@
 class Enigma
 
-  attr_reader :character_set, :message_characters, :encrypted_message
+  attr_reader :character_set, :message_characters
 
   def initialize
     @character_set = ("a".."z").to_a << " "
@@ -9,6 +9,7 @@ class Enigma
     @shift_hash = {}
     @message_characters = []
     @number = 0
+    @revert_number = 0
   end
 
   def generate_key
@@ -88,4 +89,47 @@ class Enigma
     @encrypt_result[:date] = date
     @encrypt_result
   end
+
+  def decrypt(message, key, date = today_date)
+    @decrypt_result = Hash.new(0)
+    create_key_hash(key)
+    create_offset_hash(date)
+    create_shift_values_hash
+    @decrypt_result[:decryption] = revert_message(message)
+    @decrypt_result[:key] = key
+    @decrypt_result[:date] = date
+    @decrypt_result
+  end
+
+  def revert_character(character)
+    if @character_set.include?(character) == false
+      reverted_character = character
+    else
+      @revert_number += 1
+      if @revert_number == 1
+       character_index = @character_set.index(character)
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:A])[0]
+     elsif @revert_number == 2
+       character_index = @character_set.index(character)
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:B])[0]
+     elsif @revert_number == 3
+       character_index = @character_set.index(character)
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:C])[0]
+     elsif @revert_number == 4
+       @revert_number = 0
+       character_index = @character_set.index(character)
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:D])[0]
+      end
+    end
+    reverted_character
+  end
+
+  def revert_message(message)
+    message_to_array(message)
+   @result = @message_characters.map do |character|
+      revert_character(character)
+    end
+    @result.join
+  end
+
 end
