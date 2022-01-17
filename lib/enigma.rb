@@ -9,6 +9,7 @@ class Enigma
     @shift_hash = {}
     @message_characters = []
     @number = 0
+    @revert_number = 0
   end
 
   def generate_key
@@ -48,7 +49,7 @@ class Enigma
   end
 
   def convert_character(character)
-    if !@character_set.include?(character) == true
+    if @character_set.include?(character) == false
       converted_character = character
     else
       @number += 1
@@ -93,20 +94,20 @@ class Enigma
     if @character_set.include?(character) == false
       reverted_character = character
     else
-      @number += 1
-      if @number == 1
+      @revert_number += 1
+      if @revert_number == 1
        character_index = @character_set.index(character)
-       converted_character = @character_set.rotate((character_index + @shift_hash[:A]) * -1)[0]
-      elsif @number == 2
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:A])[0]
+     elsif @revert_number == 2
        character_index = @character_set.index(character)
-       converted_character = @character_set.rotate((character_index + @shift_hash[:B]) * -1)[0]
-      elsif @number == 3
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:B])[0]
+     elsif @revert_number == 3
        character_index = @character_set.index(character)
-       converted_character = @character_set.rotate((character_index + @shift_hash[:C]) * -1)[0]
-      elsif @number == 4
-       @number = 0
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:C])[0]
+     elsif @revert_number == 4
+       @revert_number = 0
        character_index = @character_set.index(character)
-       converted_character = @character_set.rotate((character_index + @shift_hash[:D]) * -1)[0]
+       reverted_character = @character_set.rotate(character_index - @shift_hash[:D])[0]
       end
     end
     reverted_character

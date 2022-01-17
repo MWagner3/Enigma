@@ -76,8 +76,12 @@ RSpec.describe Enigma do
     enigma.create_key_hash("54321")
     enigma.create_offset_hash("011522")
     enigma.create_shift_values_hash
-    enigma.convert_character('h')
     expect(enigma.revert_character('n')).to eq('h')
+    expect(enigma.revert_character('y')).to eq('e')
+    expect(enigma.revert_character('y')).to eq('l')
+    expect(enigma.revert_character('j')).to eq('l')
+    expect(enigma.revert_character('u')).to eq('o')
+    expect(enigma.revert_character('!')).to eq('!')
   end
 
   it '#convert_message' do
