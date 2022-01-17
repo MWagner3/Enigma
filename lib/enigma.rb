@@ -1,6 +1,6 @@
 class Enigma
 
-  attr_reader :character_set, :message_characters, :encrypted_message
+  attr_reader :character_set, :message_characters
 
   def initialize
     @character_set = ("a".."z").to_a << " "
