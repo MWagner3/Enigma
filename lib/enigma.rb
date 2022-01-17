@@ -11,7 +11,6 @@ class Enigma
     @number = 0
   end
 
-
   def generate_key
     rand(99999).to_s.rjust(5, "0")
   end
@@ -75,19 +74,14 @@ class Enigma
      @result.join
    end
 
-  def encrypt(message, key = generate_key, date = today_date)
-
-  #   result = {
-  #   encryption: x,
-  #   key:        key,
-  #   date:       date
-  # }
-
-
+  def encrypt(message, key_string = generate_key, date = today_date)
+    @encrypt_result = Hash.new(0)
+    create_key_hash(key_string)
+    create_offset_hash(date)
+    create_shift_values_hash
+    @encrypt_result[:encryption] = convert_message(message)
+    @encrypt_result[:key] = key_string
+    @encrypt_result[:date] = date
+    @encrypt_result
   end
-
-
-
-
-
 end

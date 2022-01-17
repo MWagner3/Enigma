@@ -79,8 +79,8 @@ RSpec.describe Enigma do
     expect(enigma.convert_message('hello')).to eq("nyyju")
   end
 
-  xit '#encrypt returns a hash with three keys' do
+  it '#encrypt returns a hash with three keys' do
 
-    expect(enigma.encrypt("hello world", "02715", "040895")).to be_a(Hash)
+    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
   end
 end
