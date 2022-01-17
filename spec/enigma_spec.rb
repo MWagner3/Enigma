@@ -108,9 +108,15 @@ RSpec.describe Enigma do
   end
 
   it '#encrypt returns a hash with three keys, can generate key and date if none are provided' do
-
-    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
     expect(enigma.encrypt("hello world", "54321")).to be_a(Hash)
     expect(enigma.encrypt("hello world")).to be_a(Hash)
+    expect(enigma.encrypt("hello world", "54321", "011522")).to be_a(Hash)
   end
+
+  it '#decrypt returns a hash with three keys, can generate a date if none are provided' do
+
+    expect(enigma.decrypt("nyyjutimxeq", "54321", "011522")).to be_a(Hash)
+    expect(enigma.decrypt("nyyjutimxeq", "54321")).to be_a(Hash)
+  end
+
 end

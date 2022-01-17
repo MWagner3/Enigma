@@ -90,6 +90,17 @@ class Enigma
     @encrypt_result
   end
 
+  def decrypt(message, key, date = today_date)
+    @decrypt_result = Hash.new(0)
+    create_key_hash(key)
+    create_offset_hash(date)
+    create_shift_values_hash
+    @decrypt_result[:decryption] = revert_message(message)
+    @decrypt_result[:key] = key
+    @decrypt_result[:date] = date
+    @decrypt_result
+  end
+
   def revert_character(character)
     if @character_set.include?(character) == false
       reverted_character = character
