@@ -48,7 +48,7 @@ class Enigma
   end
 
   def convert_character(character)
-    if @character_set.include?(character) == false
+    if !@character_set.include?(character) == true
       converted_character = character
     else
       @number += 1
@@ -88,4 +88,36 @@ class Enigma
     @encrypt_result[:date] = date
     @encrypt_result
   end
+
+  def revert_character(character)
+    if @character_set.include?(character) == false
+      reverted_character = character
+    else
+      @number += 1
+      if @number == 1
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate((character_index + @shift_hash[:A]) * -1)[0]
+      elsif @number == 2
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate((character_index + @shift_hash[:B]) * -1)[0]
+      elsif @number == 3
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate((character_index + @shift_hash[:C]) * -1)[0]
+      elsif @number == 4
+       @number = 0
+       character_index = @character_set.index(character)
+       converted_character = @character_set.rotate((character_index + @shift_hash[:D]) * -1)[0]
+      end
+    end
+    reverted_character
+  end
+
+  # def revert_message(message)
+  #   message_to_array(message)
+  #  @result = @message_characters.map do |character|
+  #     revert_character(character)
+  #   end
+  #   @result.join
+  # end
+
 end

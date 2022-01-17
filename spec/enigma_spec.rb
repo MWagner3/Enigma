@@ -72,6 +72,14 @@ RSpec.describe Enigma do
     expect(enigma.convert_character('!')).to eq('!')
   end
 
+  it '#revert_character' do
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    enigma.convert_character('h')
+    expect(enigma.revert_character('n')).to eq('h')
+  end
+
   it '#convert_message' do
 
     enigma.create_key_hash("54321")
@@ -81,7 +89,9 @@ RSpec.describe Enigma do
   end
 
   it '#convert_message should ignore special characters' do
-
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
     expect(enigma.convert_message('H!e*l&lo')).to eq("n!y*y&ju")
   end
 
