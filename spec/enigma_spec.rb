@@ -92,6 +92,14 @@ RSpec.describe Enigma do
     expect(enigma.convert_message('hello')).to eq("nyyju")
   end
 
+  it '#revert_message' do
+
+    enigma.create_key_hash("54321")
+    enigma.create_offset_hash("011522")
+    enigma.create_shift_values_hash
+    expect(enigma.revert_message('nyyju')).to eq("hello")
+  end
+
   it '#convert_message should ignore special characters' do
     enigma.create_key_hash("54321")
     enigma.create_offset_hash("011522")

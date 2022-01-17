@@ -113,12 +113,12 @@ class Enigma
     reverted_character
   end
 
-  # def revert_message(message)
-  #   message_to_array(message)
-  #  @result = @message_characters.map do |character|
-  #     revert_character(character)
-  #   end
-  #   @result.join
-  # end
+  def revert_message(message)
+    message_to_array(message)
+   @result = @message_characters.map do |character|
+      revert_character(character)
+    end
+    @result.join
+  end
 
 end
